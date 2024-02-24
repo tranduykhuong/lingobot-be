@@ -198,16 +198,16 @@ class UserViewSet(AuthenticationPermissionMixins, viewsets.ModelViewSet):
             + "."
             + str(avatar.content_type).split("/")[1]
         )
-        filename = "lingobot/" + filename
-        
+        path = "lingobot/" + filename
+
         bucket = storage.bucket()
-        blob = bucket.blob(filename)
+        blob = bucket.blob(path)
         blob.upload_from_string(
             avatar.read(), content_type=avatar.content_type
         )
 
         avatar_url = (
-            "https://firebasestorage.googleapis.com/v0/b/gokag-19eac.appspot.com/o/"
+            "https://firebasestorage.googleapis.com/v0/b/gokag-19eac.appspot.com/o/lingobot%2F"
             + filename
             + "?alt=media"
         )
