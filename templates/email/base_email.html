@@ -1,0 +1,54 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>{% block title %}LingoBot AI{% endblock %}</title>
+  </head>
+  <body
+    style="
+      font-family: Helvetica, Arial, sans-serif;
+      min-width: 1000px;
+      overflow: auto;
+      line-height: 2;
+    "
+  >
+    <div style="margin: 50px auto; width: 70%; padding: 20px 0">
+      <div style="border-bottom: 1px solid #eee">
+        <a
+          href=""
+          style="
+            font-size: 1.4em;
+            color: #00466a;
+            text-decoration: none;
+            font-weight: 600;
+          "
+          >LingoBot AI</a
+        >
+      </div>
+
+      <p style="font-size: 1.1em">
+        {% block greeting %}Hi {% endblock %}<strong
+          >{{ recipient_name }}</strong
+        >,
+      </p>
+
+      {% block content %} {{ block.super }} {% endblock %}
+
+      <hr style="border: none; border-top: 1px solid #eee" />
+
+      <div
+        style="
+          float: right;
+          padding: 8px 0;
+          color: #aaa;
+          font-size: 0.8em;
+          line-height: 1;
+          font-weight: 300;
+        "
+      >
+        <p>LingoBot AI</p>
+        <p></p>
+        <p>Ho Chi Minh City</p>
+      </div>
+    </div>
+  </body>
+</html>
