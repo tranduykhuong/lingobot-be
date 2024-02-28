@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     "corsheaders",
     # Install apps
     "authentication",
+    "text2text",
 ]
 
 MIDDLEWARE = [
