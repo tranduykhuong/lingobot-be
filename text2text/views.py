@@ -13,7 +13,7 @@ from api.utils import (try_except_wrapper)
 class Text2TextApi(ViewSet):
     tokenizer = T5Tokenizer.from_pretrained("google-t5/t5-base")
     model = T5ForConditionalGeneration.from_pretrained(
-        pretrained_model_name_or_path='text2text/chatgpt_paraphraser_on_T5_base', 
+        pretrained_model_name_or_path='text2text/chatgpt_paraphraser_T5_base', 
         local_files_only=True,
     )
 
