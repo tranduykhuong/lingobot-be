@@ -1,6 +1,6 @@
 # LingoBot AI - An Paraphrasing Website
 
-![Alt text](https://play-lh.googleusercontent.com/HdZoKJpoD4wl8h_k0OllIxRzYROcPmEKuti-wEIeovIesecUXgkCeQaA9fhHAa8XYeNe=w240-h480-rw)
+![Alt text](https://firebasestorage.googleapis.com/v0/b/gokag-19eac.appspot.com/o/lingobot%2FLogoApp.svg?alt=media)
 
 ## Introduction
 
