@@ -1,0 +1,2 @@
+text2text/chatgpt_paraphraser_T5_base filter=lfs diff=lfs merge=lfs -text
+text2text/chatgpt_paraphraser_T5_base/* filter=lfs diff=lfs merge=lfs -text
