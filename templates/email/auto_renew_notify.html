@@ -1,0 +1,29 @@
+{% extends "email/base_email.html" %}
+
+{% block content %}
+    <p>We would like to inform you that your {{ package_name }} package has only <strong>{{ day_left }}</strong> 
+        days left before expiration on <strong>{{ package_end }}</strong>.</p>
+
+    <p>Here are the details of your <strong>{{ package_name }}</strong> package:</p>
+
+    <div style="border: 1px solid #ccc; padding: 10px; margin-top: 15px;">
+        <p><strong>{{ package_name }} Package Details:</strong></p>
+        <ul>
+            <li><strong>Package:</strong> {{ package_name }}</li>
+            <li><strong>Duration:</strong> {{ package_duration }} month(s)</li>
+            <li><strong>Start time:</strong> {{ package_start }}</li>
+            <li><strong>End time:</strong> {{ package_end }}</li>
+        </ul>
+    </div>
+
+    <p style="background-color: #ffffd8;">The package will be automatically renewed at <strong>{{ package_end }}</strong> 
+        Please make sure your account has enough balance for payment.
+    </p>
+    <p></p>
+
+    <p>If you have any questions or need further assistance, feel free to contact our support team.</p>
+
+    <p>Thank you for choosing our {{ package_name }} service!</p>
+
+    <p>Best regards,<br>TurisVPN Solution</p>
+{% endblock %}

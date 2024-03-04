@@ -1,0 +1,21 @@
+{% extends "email/base_email.html" %}
+
+{% block content %}
+    <p>We will send you a payment invoice for your {{ package_name }} package renewal.</p>
+
+    <p>Below are the details of your renewed invoice:</p>
+
+    <div style="border: 1px solid #ccc; padding: 10px; margin-top: 15px;">
+        <p><strong>Invoice Number:</strong> {{ invoice_number }}</p>
+        <p><strong>Payment Date:</strong> {{ payment_date }}</p>
+        <p><strong>Total Amount:</strong> ${{ total_price }}</p>
+    </div>
+
+    <p>You can download your updated electronic invoice by clicking <a href="{{ link_to_invoice }}" style="color: #00466a; text-decoration: underline;">here</a>.</p>
+
+    <p>If you have any queries or need further assistance, don't hesitate to contact our support team.</p>
+
+    <p>Thank you for continuing to choose our {{ package_name }} service!</p>
+
+    <p>Best regards,<br>TurisVPN Solution</p>
+{% endblock %}

@@ -10,5 +10,6 @@ router.register("auth", UserViewSet, basename="auth")
 router.register("text2text", Text2TextApi, basename="text2text")
 
 urlpatterns = [
+    path("payment/", include("payment.urls")),
     path("", include(router.urls)),
 ]

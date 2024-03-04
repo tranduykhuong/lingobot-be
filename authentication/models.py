@@ -62,6 +62,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         max_length=20, choices=ROLE_CHOICES, default="user"
     )
     change_password_at = models.DateTimeField(blank=True, null=True)
+    is_staff = models.BooleanField(default=False)
     is_verify = models.BooleanField(default=False)
     create_at = models.DateTimeField(auto_now_add=True)
 

@@ -21,3 +21,6 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", include("api.urls")),
 ]
+
+admin.site.site_header = "LingoBot Administration"
+admin.site.index_title = "LingoBot Administration"

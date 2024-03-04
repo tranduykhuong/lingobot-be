@@ -1,0 +1,41 @@
+{% extends "email/base_email.html" %}
+
+{% block content %}
+    <p>Congratulations! We're delighted to inform you that your subscription to our {{ package_name }} package has been successfully renewed.</p>
+
+    <p>Here are the details of your <strong>{{ package_name }}</strong> package:</p>
+
+    <div style="border: 1px solid #ccc; padding: 10px; margin-top: 15px;">
+        <p><strong>{{ package_name }} Package Details:</strong></p>
+        <ul>
+            <li><strong>Package:</strong> {{ package_name }}</li>
+            <li><strong>Duration:</strong> {{ package_duration }} month(s)</li>
+            <li><strong>Start time:</strong> {{ package_start }}</li>
+            <li><strong>New End time:</strong> {{ package_end }}</li>
+        </ul>
+    </div>
+
+    <p>Below are the details of your renewed invoice:</p>
+
+    <div style="border: 1px solid #ccc; padding: 10px; margin-top: 15px;">
+        {% if invoice_number %}
+        <p><strong>Invoice Number:</strong> {{ invoice_number }}</p>
+        {% else  %}
+        <p><strong>Invoice Number:</strong> Updating</p>
+        {% endif %}
+        <p><strong>Payment Date:</strong> {{ payment_date }}</p>
+        <p><strong>Total Amount:</strong> ${{ total_price }}</p>
+    </div>
+
+    {% if link_to_invoice %}
+    <p>You can download your updated electronic invoice by clicking <a href="{{ link_to_invoice }}" style="color: #00466a; text-decoration: underline;">here</a>.</p>
+    {% else %}
+    <p>Your payment invoice is being created. It will be sent to you as soon as possible.</p>
+    {% endif %}
+
+    <p>If you have any queries or need further assistance, don't hesitate to contact our support team.</p>
+
+    <p>Thank you for continuing to choose our {{ package_name }} service!</p>
+
+    <p>Best regards,<br>TurisVPN Solution</p>
+{% endblock %}

@@ -8,8 +8,7 @@ from rest_framework.views import APIView
 from rest_framework.viewsets import ViewSet
 from transformers import T5Tokenizer, T5ForConditionalGeneration
 
-from api.utils import (ObjectResponse, StatusResponse,
-                       try_except_wrapper)
+from api.utils import (try_except_wrapper)
 
 class Text2TextApi(ViewSet):
     tokenizer = T5Tokenizer.from_pretrained("google-t5/t5-base")
@@ -42,11 +41,7 @@ class Text2TextApi(ViewSet):
         preds = [self.tokenizer.decode(g, skip_special_tokens=True, clean_up_tokenization_spaces=True) for g in generated_ids]
 
         return Response(
-                ObjectResponse(
-                    StatusResponse.STATUS_SUCCESS,
-                    "successfully.",
-                   preds[0],
-                ).get_json(),
+                data=preds[0],
                 status=status.HTTP_200_OK,
             )
     
@@ -76,10 +71,6 @@ class Text2TextApi(ViewSet):
         preds = [self.tokenizer.decode(g, skip_special_tokens=True, clean_up_tokenization_spaces=True) for g in generated_ids]
 
         return Response(
-                ObjectResponse(
-                    StatusResponse.STATUS_SUCCESS,
-                    "successfully.",
-                   preds,
-                ).get_json(),
+                data=preds,
                 status=status.HTTP_200_OK,
             )

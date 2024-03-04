@@ -55,8 +55,10 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt.token_blacklist",
     "corsheaders",
     # Install apps
+    "api",
     "authentication",
     "text2text",
+    "payment"
 ]
 
 MIDDLEWARE = [
@@ -173,15 +175,16 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
-    "EXCEPTION_HANDLER": "rest_framework.views.exception_handler",
-    # 'EXCEPTION_HANDLER': 'api.exceptions.custom_exception_handler',
+    # "EXCEPTION_HANDLER": "rest_framework.views.exception_handler",
+    'EXCEPTION_HANDLER': 'api.exceptions.custom_exception_handler',
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
+    "DEFAULT_RENDERER_CLASSES": ["api.renderers.APIJSONRenderer"],
     "PAGE_SIZE": 2,
 }
 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
-    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=1),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
     "ROTATE_REFRESH_TOKENS": False,
     "BLACKLIST_AFTER_ROTATION": True,
     "ALGORITHM": "HS256",
@@ -223,3 +226,9 @@ EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS")
 EMAIL_HOST_USER = os.getenv("EMAIL_ADDRESS")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_PASSWORD")
 DEFAULT_FROM_EMAIL = os.getenv("EMAIL_ADDRESS")
+
+STRIPE_SECRET_KEY_TEST = os.getenv("STRIPE_SECRET_KEY_TEST")
+STRIPE_PUBLIC_KEY_TEST = os.getenv("STRIPE_PUBLIC_KEY_TEST")
+STRIPE_ENDPOINT_SECRET = os.getenv("STRIPE_ENDPOINT_SECRET")
+STRIPE_REDIRECT_SUCCESS_URL = os.getenv("STRIPE_REDIRECT_SUCCESS_URL")
+STRIPE_REDIRECT_CANCEL_URL = os.getenv("STRIPE_REDIRECT_CANCEL_URL")

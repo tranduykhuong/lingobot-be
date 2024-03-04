@@ -2,7 +2,7 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
-from api import firebase
+from api.services import firebase
 
 def main():
     """Run administrative tasks."""

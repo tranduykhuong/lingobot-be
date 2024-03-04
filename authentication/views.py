@@ -15,14 +15,13 @@ from api.exceptions import (AvatarRequireExcepion,
                             LoginFailedExcepion, RefreshTokenRequireExcepion,
                             SendEmailExcepion)
 from api.mixins import AuthenticationPermissionMixins
-from api.utils import (ObjectResponse, StatusResponse, TokenJWT,
-                       try_except_wrapper)
+from api.utils import (TokenJWT, try_except_wrapper)
 
 from .models import User
 from .serializers import (UserAvatarSerializer, UserListCreateSerializer,
                           UserUpdateSerializer)
 
-from api.mail import MailService
+from api.services.mail import MailService
 
 class UserViewSet(AuthenticationPermissionMixins, viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -59,11 +58,7 @@ class UserViewSet(AuthenticationPermissionMixins, viewsets.ModelViewSet):
                 print(e)
 
             return Response(
-                ObjectResponse(
-                    StatusResponse.STATUS_SUCCESS,
-                    "Register account successfully.",
-                    serializer.data,
-                ).get_json(),
+                data=serializer.data,
                 status=status.HTTP_201_CREATED,
             )
 
@@ -95,15 +90,11 @@ class UserViewSet(AuthenticationPermissionMixins, viewsets.ModelViewSet):
         user_serializer = UserListCreateSerializer(user)
 
         return Response(
-            ObjectResponse(
-                StatusResponse.STATUS_SUCCESS,
-                "Logged in successfully.",
-                {
+            data={
                     "user": user_serializer.data,
                     "access_token": access_token,
                     "refresh_token": refresh_token,
                 },
-            ).get_json(),
             status=status.HTTP_200_OK,
         )
 
@@ -121,11 +112,7 @@ class UserViewSet(AuthenticationPermissionMixins, viewsets.ModelViewSet):
             token.blacklist()
             logout(request)
             return Response(
-                ObjectResponse(
-                    StatusResponse.STATUS_SUCCESS,
-                    "Logged out successfully.",
-                    "",
-                ).get_json(),
+                data="",
                 status=status.HTTP_200_OK,
             )
 
@@ -136,11 +123,7 @@ class UserViewSet(AuthenticationPermissionMixins, viewsets.ModelViewSet):
     def profile(self, request):
         user_serializer = UserListCreateSerializer(request.user)
         return Response(
-            ObjectResponse(
-                StatusResponse.STATUS_SUCCESS,
-                "Get profile successfully.",
-                user_serializer.data,
-            ).get_json(),
+            data=user_serializer.data,
             status=status.HTTP_200_OK,
         )
 
@@ -157,11 +140,7 @@ class UserViewSet(AuthenticationPermissionMixins, viewsets.ModelViewSet):
         instance = get_object_or_404(User, slug=slug)
         user_serializer = UserListCreateSerializer(instance)
         return Response(
-            ObjectResponse(
-                StatusResponse.STATUS_SUCCESS,
-                "Get profile successfully.",
-                user_serializer.data,
-            ).get_json(),
+            data=user_serializer.data,
             status=status.HTTP_200_OK,
         )
 
@@ -176,11 +155,7 @@ class UserViewSet(AuthenticationPermissionMixins, viewsets.ModelViewSet):
             user_serializer.save()
 
             return Response(
-                ObjectResponse(
-                    StatusResponse.STATUS_SUCCESS,
-                    "Update profile successfully.",
-                    user_serializer.data,
-                ).get_json(),
+                data=user_serializer.data,
                 status=status.HTTP_200_OK,
             )
 
@@ -219,11 +194,7 @@ class UserViewSet(AuthenticationPermissionMixins, viewsets.ModelViewSet):
             user_serializer.save()
 
             return Response(
-                ObjectResponse(
-                    StatusResponse.STATUS_SUCCESS,
-                    "Update avatar successfully.",
-                    user_serializer.data,
-                ).get_json(),
+                data=user_serializer.data,
                 status=status.HTTP_200_OK,
             )
 
