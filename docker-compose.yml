@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  lingobot:
+    image: lingobot-be:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+
+  db:
+    image: postgres:latest
+    ports:
+      - "5435:5432"
+    environment:
+      - POSTGRES_PASSWORD=LingoBot
+      - POSTGRES_USER=LingoBot
+      - POSTGRES_DB=LingoBot
+    container_name: lingobot-database
