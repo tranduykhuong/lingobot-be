@@ -91,7 +91,7 @@ class StripeWebhookView(View):
         except ValueError as e:
             return JsonResponse({"error": "Invalid payload"}, status=400)
         except stripe.error.SignatureVerificationError as e:
-            return JsonResponse({"error": "Invalid signature"}, status=400)
+            return JsonResponse({"error": f"Invalid signature: {e}"}, status=400)
 
         try:
             if event["type"] == STRIPE_EVENTS["CHECKOUT_SESSION_COMPLETED"]:
