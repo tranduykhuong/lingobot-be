@@ -83,6 +83,7 @@ class StripeWebhookView(View):
     def post(self, request, *args, **kwargs):
         payload = request.body.decode("utf-8")
         sig_header = request.headers.get("Stripe-Signature")
+        print(sig_header)
 
         try:
             print(os.getenv('STRIPE_ENDPOINT_SECRET'))
