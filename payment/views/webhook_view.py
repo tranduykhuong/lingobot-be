@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 from itertools import chain
 
 import pytz
+import os
 from django.conf import settings
 from django.db.models import Q
 from django.http import HttpResponse, JsonResponse
@@ -85,7 +86,7 @@ class StripeWebhookView(View):
 
         try:
             event = stripe.Webhook.construct_event(
-                payload, sig_header, settings.STRIPE_ENDPOINT_SECRET
+                payload, sig_header, os.getenv('STRIPE_ENDPOINT_SECRET')
             )
 
         except ValueError as e:
