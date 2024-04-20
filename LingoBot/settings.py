@@ -54,7 +54,8 @@ INSTALLED_APPS = [
     "api",
     "authentication",
     "text2text",
-    "payment"
+    "payment",
+    "history"
 ]
 
 MIDDLEWARE = [
@@ -69,9 +70,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-]
+CORS_ALLOWED_ORIGINS = os.getenv('ALLOWED_ORIGINS').split(',')
 CORS_ALLOW_HEADERS = [
     "accept",
     "accept-encoding",
@@ -193,7 +192,7 @@ SIMPLE_JWT = {
     "TOKEN_TYPE_CLAIM": "token_type",
     "JTI_CLAIM": "jti",
     "SLIDING_TOKEN_REFRESH_EXP_CLAIM": "refresh_exp",
-    "SLIDING_TOKEN_LIFETIME": timedelta(minutes=5),
+    "SLIDING_TOKEN_LIFETIME": timedelta(minutes=60),
     "SLIDING_TOKEN_REFRESH_LIFETIME": timedelta(days=1),
 }
 
