@@ -1,3 +1,4 @@
+import json
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import status
@@ -7,11 +8,48 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.viewsets import ViewSet
 from transformers import T5Tokenizer, T5ForConditionalGeneration
+from nltk.translate.bleu_score import sentence_bleu
 
 from api.utils import (try_except_wrapper)
 
+from paraphrase_metrics import metrics as pm
+import spacy
+nlp = spacy.load("en_core_web_sm")
+
 class Text2TextApi(ViewSet):
-    pass
+    @action(
+        detail=False,
+        methods=["POST"],
+        url_path="score",
+        url_name="score",
+    )
+    @try_except_wrapper
+    def score(self, request):
+        body = json.loads(request.body)
+        
+        input_text = body['input']
+        output_text = body['output']
+        
+        reference = [input_text.split()]
+        candidate = output_text.split()
+
+        bleu_score = sentence_bleu(reference, candidate)
+
+        s = nlp(input_text)
+        t = nlp(output_text)
+
+        wpd = pm.wpd(s,t)
+        ld = pm.ld(s,t)
+        
+        return Response(
+            data={
+                "bleu_score": bleu_score,
+                "wpd": wpd,
+                "ld": ld
+            },
+            status=status.HTTP_200_OK,
+        )
+
     # tokenizer = T5Tokenizer.from_pretrained("google-t5/t5-base")
     # model = T5ForConditionalGeneration.from_pretrained(
     #     pretrained_model_name_or_path='text2text/chatgpt_paraphraser_T5_base', 

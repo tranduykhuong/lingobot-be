@@ -72,9 +72,9 @@ class UserViewSetTestCase(TestCase):
         user = self.client.post(self.login_url, self.login_data, format="json")
         response = self.client.post(
             self.logout_url,
-            {"refresh_token": user.data["data"]["refresh_token"]},
+            {"refresh_token": user.data["refresh_token"]},
             format="json",
-            HTTP_AUTHORIZATION=f'Bearer {user.data["data"]["access_token"]}',
+            HTTP_AUTHORIZATION=f'Bearer {user.data["access_token"]}',
         )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
@@ -85,7 +85,7 @@ class UserViewSetTestCase(TestCase):
 
         response = self.client.post(
             self.logout_url,
-            {"refresh_token": user.data["data"]["refresh_token"]},
+            {"refresh_token": user.data["refresh_token"]},
             format="json",
         )
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
@@ -96,17 +96,17 @@ class UserViewSetTestCase(TestCase):
         user = self.client.post(self.login_url, self.login_data, format="json")
         response = self.client.post(
             self.logout_url,
-            {"refresh_token": user.data["data"]["refresh_token"]},
+            {"refresh_token": user.data["refresh_token"]},
             format="json",
-            HTTP_AUTHORIZATION=f'Bearer {user.data["data"]["access_token"]}',
+            HTTP_AUTHORIZATION=f'Bearer {user.data["access_token"]}',
         )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         response = self.client.post(
             self.logout_url,
-            {"refresh_token": user.data["data"]["refresh_token"]},
+            {"refresh_token": user.data["refresh_token"]},
             format="json",
-            HTTP_AUTHORIZATION=f'Bearer {user.data["data"]["access_token"]}',
+            HTTP_AUTHORIZATION=f'Bearer {user.data["access_token"]}',
         )
         self.assertEqual(
             response.status_code, status.HTTP_500_INTERNAL_SERVER_ERROR
@@ -117,7 +117,7 @@ class UserViewSetTestCase(TestCase):
         user = self.client.post(self.login_url, self.login_data, format="json")
         response = self.client.get(
             self.profile_url,
-            HTTP_AUTHORIZATION=f'Bearer {user.data["data"]["access_token"]}',
+            HTTP_AUTHORIZATION=f'Bearer {user.data["access_token"]}',
         )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
@@ -129,9 +129,9 @@ class UserViewSetTestCase(TestCase):
             self.update_url,
             updated_data,
             format="json",
-            HTTP_AUTHORIZATION=f'Bearer {user.data["data"]["access_token"]}',
+            HTTP_AUTHORIZATION=f'Bearer {user.data["access_token"]}',
         )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(
-            response.data["data"]["first_name"], updated_data["first_name"]
+            response.data["first_name"], updated_data["first_name"]
         )

@@ -7,26 +7,6 @@ from rest_framework import status
 from rest_framework.exceptions import APIException
 from rest_framework.response import Response
 
-
-class ObjectResponse:
-    def __init__(self, status, message, data):
-        self.status = status
-        self.message = message
-        self.data = data
-
-    def get_json(self):
-        return {
-            "status": self.status,
-            "message": self.message,
-            "data": self.data,
-        }
-
-
-class StatusResponse:
-    STATUS_SUCCESS = "Success"
-    STATUS_FAILED = "Failed"
-
-
 class TokenJWT:
     def generate_token(payload):
         token = jwt.encode(
